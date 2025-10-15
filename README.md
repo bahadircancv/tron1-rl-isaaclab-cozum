@@ -63,3 +63,14 @@ Go to your Isaac Lab root directory, then run:
 ```zsh
 ./isaaclab.sh -p path/to/tron1-rl-isaaclab-cozum/scripts/rsl_rl/train.py --task=Isaac-Limx-WF-Blind-Flat-v0 --headless
 ```
+
+## Running play.py
+If `logs` folder where trained model resides in, is located in Isaac Lab directory:
+```zsh
+ ./isaaclab.sh -p ../tron1-rl-isaaclab-cozum/scripts/rsl_rl/play.py --task=<task_name>
+```
+If it is in `tron1-rl-isaaclab-cozum`:
+```zsh
+python scripts/rsl_rl/play.py --task=<task_name>
+```
+should be used.
