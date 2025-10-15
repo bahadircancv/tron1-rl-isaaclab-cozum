@@ -74,3 +74,8 @@ If it is in `tron1-rl-isaaclab-cozum`:
 python scripts/rsl_rl/play.py --task=<task_name>
 ```
 should be used.
+
+### with keyboard
+```zsh
+ ./isaaclab.sh -p ../tron1-rl-isaaclab-cozum/scripts/rsl_rl/play.py --task=<task_name> --keyboard --num_envs=1
+```
