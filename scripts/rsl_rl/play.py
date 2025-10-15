@@ -21,6 +21,7 @@ parser.add_argument("--task", type=str, default=None, help="Name of the task.")
 parser.add_argument("--seed", type=int, default=None, help="Seed used for the environment")
 parser.add_argument("--checkpoint_path", type=str, default=None, help="Relative path to checkpoint file.")
 parser.add_argument("--keyboard", action="store_true", default=False, help="Whether to use keyboard.")
+parser.add_argument("--debug", action="store_true", default=False, help="Whether to use keyboard.")
 
 # append RSL-RL cli arguments
 cli_args.add_rsl_rl_args(parser)
@@ -127,7 +128,8 @@ def main():
             import math
 
             cmd = list(controller.advance())  # [vx, vy, ωz]
-            print(f"[DEBUG] cmd: {cmd}")
+            if args_cli.debug:
+                print(f"[DEBUG] cmd: {cmd}")
             if aim["target"] is None:
                 cmd[0] = cmd[0] * 3
                 # cmd[1] = cmd[1] * 5
