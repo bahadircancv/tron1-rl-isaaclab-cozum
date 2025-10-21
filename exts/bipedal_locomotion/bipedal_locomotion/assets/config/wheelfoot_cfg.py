@@ -28,9 +28,16 @@ WHEELFOOT_CFG = ArticulationCfg(
         activate_contact_sensors=True,
     ),
     init_state=ArticulationCfg.InitialStateCfg(
-        pos=(0.0, 0.0, 0.8+0.166),
+        # pos=(0.0, 0.0, 0.8+0.166),
+        rot=(0, -0.4968801, 0, 0.8678192 ),
+        pos=(0.0, 0.0, 0.55),
         joint_pos={
-            ".*_Joint": 0.0,
+            "abad_L_Joint": 0,
+            "abad_R_Joint": 0,
+            "hip_L_Joint": -0.80,
+            "hip_R_Joint": 0.80,
+            "knee_L_Joint": 1.15,
+            "knee_R_Joint": -1.15,
         },
         joint_vel={".*": 0.0},
     ),

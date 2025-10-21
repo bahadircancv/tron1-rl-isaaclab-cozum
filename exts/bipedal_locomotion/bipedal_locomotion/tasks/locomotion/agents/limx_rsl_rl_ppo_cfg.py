@@ -158,7 +158,7 @@ class WF_TRON1AFlatPPORunnerCfg(RslRlOnPolicyRunnerCfg):
 class WF_TRON1ARoughPPORunnerCfg(RslRlOnPolicyRunnerCfg):
     num_steps_per_env = 24
     max_iterations = 10000
-    save_interval = 500
+    save_interval = 100
     experiment_name = "wf_tron_1a_rough"
     empirical_normalization = False
     policy = RslRlPpoActorCriticCfg(

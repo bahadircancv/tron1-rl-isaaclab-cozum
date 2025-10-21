@@ -30,12 +30,12 @@ class WFBaseEnvCfg(WFEnvCfg):
 
         self.scene.robot = WHEELFOOT_CFG.replace(prim_path="{ENV_REGEX_NS}/Robot")
         self.scene.robot.init_state.joint_pos = {
-            "abad_L_Joint": 0.0,
-            "abad_R_Joint": 0.0,
-            "hip_L_Joint": 0.0,
-            "hip_R_Joint": 0.0,
-            "knee_L_Joint": 0.0,
-            "knee_R_Joint": 0.0,
+            "abad_L_Joint": 0,
+            "abad_R_Joint": 0,
+            "hip_L_Joint": -0.80,
+            "hip_R_Joint": 0.80,
+            "knee_L_Joint": 1.15,
+            "knee_R_Joint": -1.15,
         }
 
         self.events.add_base_mass.params["asset_cfg"].body_names = "base_Link"

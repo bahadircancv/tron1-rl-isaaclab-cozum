@@ -296,14 +296,14 @@ class EventsCfg:
         func=mdp.reset_root_state_uniform,
         mode="reset",
         params={
-            "pose_range": {"x": (-0.5, 0.5), "y": (-0.5, 0.5), "yaw": (-3.14, 3.14)},
+            "pose_range": {"x": (-0.1, 0.1), "y": (-0.1, 0.1), "yaw": (0, 0)},
             "velocity_range": {
-                "x": (-0.5, 0.5),
-                "y": (-0.5, 0.5),
-                "z": (-0.5, 0.5),
-                "roll": (-0.5, 0.5),
-                "pitch": (-0.5, 0.5),
-                "yaw": (-0.5, 0.5),
+                "x": (-0, 0),
+                "y": (-0, 0),
+                "z": (-0, 0),
+                "roll": (-0, 0),
+                "pitch": (-0, 0),
+                "yaw": (-0, 0),
             },
         },
     )
@@ -313,8 +313,8 @@ class EventsCfg:
         func=mdp.reset_joints_by_offset,
         mode="reset",
         params={
-            "position_range": (-0.2, 0.2),
-            "velocity_range": (-0.5, 0.5),
+            "position_range": (-0.0, 0.0),
+            "velocity_range": (-0.0, 0.0),
         },
     )
 
@@ -353,7 +353,7 @@ class RewardsCfg:
     # termination related rewards
     keep_balance = RewTerm(
         func=mdp.stay_alive,
-        weight=1.0
+        weight=50.0
     )
     stand_still = RewTerm(
         func=mdp.stand_still,
@@ -361,12 +361,12 @@ class RewardsCfg:
     )
 
     # rewards
-    rew_lin_vel_xy = RewTerm(
-        func=mdp.track_lin_vel_xy_exp, weight=3.0, params={"command_name": "base_velocity", "std": math.sqrt(0.2)}
-    )
-    rew_ang_vel_z = RewTerm(
-        func=mdp.track_ang_vel_z_exp, weight=1.0, params={"command_name": "base_velocity", "std": math.sqrt(0.25)}
-    )
+    # rew_lin_vel_xy = RewTerm(
+    #     func=mdp.track_lin_vel_xy_exp, weight=3.0, params={"command_name": "base_velocity", "std": math.sqrt(0.2)}
+    # )
+    # rew_ang_vel_z = RewTerm(
+    #     func=mdp.track_ang_vel_z_exp, weight=1.0, params={"command_name": "base_velocity", "std": math.sqrt(0.25)}
+    # )
 
     # rew_nominal_foot_position = RewTerm(
     #     func=mdp.nominal_foot_position,
@@ -376,20 +376,20 @@ class RewardsCfg:
     #             "command_name": "base_velocity",
     #             "std": math.sqrt(0.5),},
     # )
-    rew_leg_symmetry = RewTerm(
-        func=mdp.leg_symmetry,
-        weight=0.5,
-        params={"asset_cfg": SceneEntityCfg("robot", body_names="wheel_.*"), "std": math.sqrt(0.5)},
-    )
-    rew_same_foot_x_position = RewTerm(
-        func=mdp.same_feet_x_position,
-        weight=-50, # 0.1, # changed to penalty mode
-        params={"asset_cfg": SceneEntityCfg("robot", body_names="wheel_.*")},
-    )
+    # rew_leg_symmetry = RewTerm(
+    #     func=mdp.leg_symmetry,
+    #     weight=0.5,
+    #     params={"asset_cfg": SceneEntityCfg("robot", body_names="wheel_.*"), "std": math.sqrt(0.5)},
+    # )
+    # rew_same_foot_x_position = RewTerm(
+    #     func=mdp.same_feet_x_position,
+    #     weight=-50, # 0.1, # changed to penalty mode
+    #     params={"asset_cfg": SceneEntityCfg("robot", body_names="wheel_.*")},
+    # )
 
     # penalizations
-    pen_lin_vel_z = RewTerm(func=mdp.lin_vel_z_l2, weight=-0.3)
-    pen_ang_vel_xy = RewTerm(func=mdp.ang_vel_xy_l2, weight=-0.3)
+    # pen_lin_vel_z = RewTerm(func=mdp.lin_vel_z_l2, weight=-0.3)
+    # pen_ang_vel_xy = RewTerm(func=mdp.ang_vel_xy_l2, weight=-0.3)
     pen_joint_torque = RewTerm(func=mdp.joint_torques_l2, weight=-0.00016)
     pen_joint_accel = RewTerm(func=mdp.joint_acc_l2, weight=-1.5e-7)
     pen_action_rate = RewTerm(func=mdp.action_rate_l2, weight=-0.3) # -0.03
@@ -400,7 +400,7 @@ class RewardsCfg:
     )
     undesired_contacts = RewTerm(
         func=mdp.undesired_contacts,
-        weight=-0.25,
+        weight=-5.0,
         params={"sensor_cfg": SceneEntityCfg("contact_forces", body_names=["abad_.*", "hip_.*", "knee_.*", "base_Link"]), "threshold": 10.0},
     )
     pen_action_smoothness = RewTerm(func=mdp.ActionSmoothnessPenalty, weight=-0.03)
@@ -412,10 +412,10 @@ class RewardsCfg:
                 "max_feet_distance": 0.35,
                 "feet_links_name": ["wheel_[RL]_Link"]}
     )
-    # pen_action_rate = RewTerm(func=mdp.action_rate_l2, weight=-0.01)
+    pen_action_rate = RewTerm(func=mdp.action_rate_l2, weight=-0.01)
     
-    # pen_joint_accel = RewTerm(func=mdp.joint_acc_l2, weight=-2.5e-7)
-    pen_base_height = RewTerm(func=mdp.base_com_height, params={"target_height": 0.80}, weight=-30.0)
+    pen_joint_accel = RewTerm(func=mdp.joint_acc_l2, weight=-2.5e-7)
+    pen_base_height = RewTerm(func=mdp.base_com_height, params={"target_height": 0.80}, weight=-3.0)
     
     
     pen_joint_power_l1 = RewTerm(func=mdp.joint_powers_l1, weight=-2e-5)
@@ -447,7 +447,7 @@ class TerminationsCfg:
     time_out = DoneTerm(func=mdp.time_out, time_out=True)
     base_contact = DoneTerm(
         func=mdp.illegal_contact,
-        params={"sensor_cfg": SceneEntityCfg("contact_forces", body_names="base_Link"), "threshold": 1.0},
+        params={"sensor_cfg": SceneEntityCfg("contact_forces", body_names="base_Link"), "threshold": 250.0},
     )
 
 
