@@ -79,3 +79,6 @@ should be used.
 ```zsh
  ./isaaclab.sh -p ../tron1-rl-isaaclab-cozum/scripts/rsl_rl/play.py --task=<task_name> --keyboard --num_envs=1
 ```
+
+## Start with ROS2
+Before running `./isaaclab.sh` or `python script/...` make sure to source ROS2 installation.
