@@ -96,6 +96,13 @@ def main():
 
     # create isaac environment
     env = gym.make(args_cli.task, cfg=env_cfg, render_mode="rgb_array" if args_cli.video else None)
+
+    if hasattr(env.unwrapped, "viewport_camera_controller") and hasattr(env.unwrapped.viewport_camera_controller, "update_view_location"):
+        env.unwrapped.viewport_camera_controller.cfg.resolution = [1920, 1080]
+        env.unwrapped.viewport_camera_controller.update_view_location(
+            eye=[10.0, 3*43.0, 1.6], lookat=[0.0, 3*43.0-17.0, 1.0]
+        )
+
     # wrap for video recording
     if args_cli.video:
         video_kwargs = {
