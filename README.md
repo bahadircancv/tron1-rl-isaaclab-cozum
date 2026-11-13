@@ -55,3 +55,5 @@ Go to your Isaac Lab root directory, then run:
 ```zsh
 ./isaaclab.sh -p path/to/tron1-rl-isaaclab-cozum/scripts/rsl_rl/train.py --task=Isaac-Limx-WF-Blind-Flat-v0 --headless
 ```
+
+## Running play.py

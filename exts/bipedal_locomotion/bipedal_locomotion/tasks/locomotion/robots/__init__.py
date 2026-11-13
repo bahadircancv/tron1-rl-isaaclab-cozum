@@ -66,6 +66,29 @@ gym.register(
     },
 )
 
+#############################
+# WF Blind Rough Environment
+#############################
+gym.register(
+    id="Isaac-Limx-WF-Blind-Rough-v0",
+    entry_point="isaaclab.envs:ManagerBasedRLEnv",
+    disable_env_checker=True,
+    kwargs={
+        "env_cfg_entry_point": limx_wheelfoot_env_cfg.WFBlindRoughEnvCfg,
+        "rsl_rl_cfg_entry_point": limx_wf_blind_flat_runner_cfg,
+    },
+)
+
+gym.register(
+    id="Isaac-Limx-WF-Blind-Rough-Play-v0",
+    entry_point="isaaclab.envs:ManagerBasedRLEnv",
+    disable_env_checker=True,
+    kwargs={
+        "env_cfg_entry_point": limx_wheelfoot_env_cfg.WFBlindRoughEnvCfg_PLAY,
+        "rsl_rl_cfg_entry_point": limx_wf_blind_flat_runner_cfg,
+    },
+)
+
 
 ############################
 # SF Blind Flat Environment

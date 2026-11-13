@@ -117,9 +117,9 @@ class SF_TRON1AFlatPPORunnerCfg(RslRlOnPolicyRunnerCfg):
 #-----------------------------------------------------------------
 @configclass
 class WF_TRON1AFlatPPORunnerCfg(RslRlOnPolicyRunnerCfg):
-    num_steps_per_env = 24
+    num_steps_per_env = 48
     max_iterations = 10000
-    save_interval = 500
+    save_interval = 100
     experiment_name = "wf_tron_1a_flat"
     empirical_normalization = False
     policy = RslRlPpoActorCriticCfg(
@@ -143,11 +143,4 @@ class WF_TRON1AFlatPPORunnerCfg(RslRlOnPolicyRunnerCfg):
         desired_kl=0.01,
         max_grad_norm=1.0,
         # obs_history_len=10,
-    )
-    encoder = EncoderCfg(
-        output_detach = True,
-        num_output_dim = 3,
-        hidden_dims = [256, 128],
-        activation = "elu",
-        orthogonal_init = False,
     )
